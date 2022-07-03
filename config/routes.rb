@@ -1,6 +1,7 @@
-Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+require_relative "../lib/route_constraints/team_exists"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+Rails.application.routes.draw do
+  scope "/:username", constraints: RouteConstraints::TeamExists do
+    get "/", to: "pages#dashboard"
+  end
 end
